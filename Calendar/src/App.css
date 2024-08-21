@@ -1,0 +1,209 @@
+:root {
+  /* Light Mode */
+  --background-color: #f0f0f0;
+  --text-color: #000;
+  --register-background: #f9f9f9;
+  --border-color: #ddd;
+  --input-border: #ccc;
+  --button-background: #007bff;
+  --button-text: #fff;
+  --button-hover-background: #0056b3;
+  --error-color: red;
+  --calendar-background: lightcyan;
+  --header-background: #f9f9f9;
+  --header-text: #000;
+  --header-border: #ccc;
+  --day-background: white;
+  --empty-background: #f9f9f9;
+  --day-border: #ddd;
+  --today-border: red;
+  --today-background: #f0f8ff;
+  --search-border: #ccc;
+}
+
+[data-theme='dark'] {
+  /* Dark Mode */
+  --background-color: #242424;
+  --text-color: #fff;
+  --register-background: #333;
+  --border-color: #444;
+  --input-border: #555;
+  --button-background: #007bff;
+  --button-text: #fff;
+  --button-hover-background: #0056b3;
+  --error-color: #f8d7da;
+  --calendar-background: #2e2e2e;
+  --header-background: #333;
+  --header-text: #fff;
+  --header-border: #555;
+  --day-background: #444;
+  --empty-background: #555;
+  --day-border: #666;
+  --today-border: #ff5722;
+  --today-background: #333;
+  --search-border: #555;
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.register {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--register-background);
+}
+
+.register h2 {
+  margin-bottom: 20px;
+}
+
+.register form div {
+  margin-bottom: 15px;
+}
+
+.register label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.register input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+}
+
+.register button {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--button-background);
+  color: var(--button-text);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.register button:hover {
+  background-color: var(--button-hover-background);
+}
+
+.error {
+  color: var(--error-color);
+  margin-bottom: 15px;
+}
+
+.calendar {
+  width: 80%; /* Adjusted to take 80% of the page width */
+  max-width: 1200px; /* Maximum width to prevent the calendar from being too large */
+  margin: 20px auto; /* Center the calendar within the page */
+  padding: 20px;
+  background-color: var(--calendar-background);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.header, .views, .search, .daysOfWeek, .days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header select, .header button {
+  margin-left: 75px;
+  padding: 5px 10px;
+  border: 1px solid var(--header-border);
+  border-radius: 4px;
+  background-color: var(--header-background);
+  color: var(--header-text);
+}
+
+.daysOfWeek div, .days .day, .days .empty {
+  flex: 3;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid var(--day-border);
+  border-radius: 4px;
+  margin: 2px;
+}
+
+.days .day {
+  background-color: var(--day-background);
+  cursor: pointer;
+}
+
+.days .empty {
+  padding: 12px;
+  text-align: center;
+  background-color: var(--empty-background);
+  cursor: pointer;
+}
+
+.days .day ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 auto; /* Center the todo list within each day */
+  text-align: center;
+  width: 100%; /* Ensure the list takes up the full width of the container */
+}
+
+.days .day ul li {
+  display: flex;
+  justify-content: center; /* Center the todo items within each list item */
+  align-items: center;
+  margin-top: 5px;
+  padding: 5px;
+  border-radius: 8px;
+}
+
+.days .day ul li button {
+  background: var(--button-background);
+  color: var(--button-text);
+  border: none;
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  margin-left: 10px; /* Space between the todo text and the button */
+  cursor: pointer;
+}
+
+.day.today {
+  border: 2px solid var(--today-border);
+  background-color: var(--today-background);
+}
+
+.days .day div {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.search input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--search-border);
+  border-radius: 8px;
+}
+
+button img {
+  width: 36px;
+  height: 36px;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+
