@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import './App.css';
+import { addTodo, getTodos } from "./service/todoService";
 import left_arrow from "./assets/bi-arrow-left-circle.svg";
 import right_arrow from "./assets/bi-arrow-right-circle.svg";
-import TodoComponent from './components/TodoComponent.jsx'; // Import TodoComponent
 
 const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -49,7 +49,7 @@ const CalendarDay = ({ date, events, handleAddTodo, todos, handleRemoveTodo }) =
   );
 };
 
-const Calendar = ({ todos, setTodos, events, setEvents, searchTerm, setSearchTerm, view, setView, selectedDate, setSelectedDate }) => {
+const Calendar = ({ todos, setTodos, events, setEvents, darkMode, setDarkMode, searchTerm, setSearchTerm, view, setView, selectedDate, setSelectedDate }) => {
   const handleChangeMonth = (e) => {
     const newMonth = parseInt(e.target.value, 10);
     setSelectedDate(new Date(selectedDate.setMonth(newMonth)));
@@ -113,7 +113,7 @@ const Calendar = ({ todos, setTodos, events, setEvents, searchTerm, setSearchTer
   );
 
   return (
-    <div className="calendar">
+    <div className={darkMode ? "calendar dark" : "calendar"}>
       <div className="header">
         <button onClick={handlePreviousMonth}>
           <img src={left_arrow} alt="Previous month" />
@@ -134,6 +134,10 @@ const Calendar = ({ todos, setTodos, events, setEvents, searchTerm, setSearchTer
         </select>
         <button onClick={handleNextMonth}>
           <img src={right_arrow} alt="Next month" />
+        </button>
+        {/* Switch Button for Dark Mode */}
+        <button onClick={() => setDarkMode(!darkMode)} className="toggle-button">
+          {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
         </button>
       </div>
       <div className="search">
@@ -169,27 +173,51 @@ function App() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [todos, setTodos] = useState({});
   const [events, setEvents] = useState([]);
+  const [darkMode, setDarkMode] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [view, setView] = useState('monthly');
 
+  // This useEffect will handle theme changes based on darkMode state
+  useEffect(() => {
+    const element = document.body;
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      setDarkMode(true);
+      element.classList.add("dark");
+    } else {
+      setDarkMode(false);
+      element.classList.remove("dark");
+    }
+  }, []);
+
+  useEffect(() => {
+    const element = document.body;
+
+    if (darkMode) {
+      element.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      element.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
+
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="app">
-        <Calendar
-          todos={todos}
-          setTodos={setTodos}
-          events={events}
-          setEvents={setEvents}
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          view={view}
-          setView={setView}
-          selectedDate={selectedDate}
-          setSelectedDate={setSelectedDate}
-        />
-        {/* Add TodoComponent at the bottom */}
-        <TodoComponent />
-      </div>
+      <Calendar
+        todos={todos}
+        setTodos={setTodos}
+        events={events}
+        setEvents={setEvents}
+        darkMode={darkMode}
+        setDarkMode={setDarkMode}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        view={view}
+        setView={setView}
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+      />
     </DndProvider>
   );
 }
