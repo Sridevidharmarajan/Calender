@@ -3,9 +3,13 @@ This project is a React-based Calendar Application that allows users to manage e
 
 Features
         Monthly Calendar View: View events and to-dos for each day of the month.
+        
         Event Management: Add, search, and drag-and-drop events.
+        
         To-do List Integration: Add and manage daily to-do lists.
+        
         Dark/Light Mode: Automatically switch between dark and light themes based on user preference.
+        
         Data Persistence: All events and to-dos are stored in a MongoDB database for persistence.
 
 Technologies Used
