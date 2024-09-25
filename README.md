@@ -15,15 +15,23 @@ Features
 Technologies Used
     Frontend:
         React (with hooks for state management and effects)
+        
         React DnD for drag-and-drop functionality
+        
         CSS for styling (including theme management)
+        
     Backend:
         Node.js with Express for API routes
+        
         MongoDB with Mongoose for data storage and modeling
+        
         CORS for cross-origin requests
+        
         Body-parser for handling JSON request bodies
+        
         Getting Started
 Prerequisites
+
         Node.js and npm installed
         MongoDB installed and running locally or use a cloud-based MongoDB service like MongoDB Atlas
 
